@@ -65,7 +65,6 @@ function RecipeForm() {
     formData.append("ingredient",ingriedient);
     formData.append("preparationtime",prep);
     formData.append("photo",image);
-    console.log("check form",formData)
 
       axios({
         method: 'post',
@@ -78,42 +77,45 @@ function RecipeForm() {
         })
         .catch((err) => {
           console.log("errorMsg",err.message);
-        toast.error(`${err.message}`)
+          window.alert(`${err.message}`)
         });
    }
   return (
     <div >
          <div className="nav-bar">
-            <nav className="navbar navbar-expand-lg bg-dark">
+         <nav className="navbar navbar-expand-lg bg-dark">
             <ul className="navbar-nav mr-auto">
-              <li className="nav-item active">
-                <a className="nav-link"style={{color:"white"}} href="#"><Link to="/">Home</Link><span class="sr-only">(current)</span></a>
-              </li>
-              <li className="nav-item active">
+            <li className="nav-item active">
+                <a className="nav-link" style={{color:"white"}} href="#"><Link to="/">Home</Link><span class="sr-only">(current)</span></a>
+            </li>
+            <li className="nav-item active">
                 <a  className="nav-link"style={{color:"white"}} Link="AddRecipe"><Link to="/AddRecipe">Add recipe</Link> <span class="sr-only">(current)</span></a>
-              </li>
-               </ul>
-                    </nav>
-            </div>
-     <div className="container" style={{marginTop:"20px",paddingBottom:"2rem"}}>
-              <form onSubmit={handleSubmit} encType="multipart/form-data">
+            </li>
+            <li className="nav-item active">
+                <a  className="nav-link"style={{color:"white"}} Link="Search"><Link to="/Search">Search recipe</Link> <span class="sr-only">(current)</span></a>
+            </li>
+           </ul>
+          </nav>
+       </div>
+             <div className="container" style={{marginTop:"20px",paddingBottom:"2rem"}}>
+              <form onSubmit={handleSubmit} encType="multipart/form-data" novalidate>
                 <h3 className="m-3">Add Recipe</h3>
                   <div className="form-group">
                     <label for="exampleInputEmail1">Recipe Name:</label>
-                    <input type="text" className="form-control"  aria-describedby="emailHelp" onChange={handlerecipename}/>
+                    <input type="text" className="form-control"  aria-describedby="emailHelp" onChange={handlerecipename} required/>
                   </div>
                   <div className="form-group">
                     <label for="exampleInputusername">Description:</label>
-                    <textarea onChange={handleDescription} className="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                    <textarea onChange={handleDescription} className="form-control" id="exampleFormControlTextarea1" rows="3" required></textarea>
                   </div>
                   <div className="form-group">
                     <label for="exampleInputusername">Calories:</label>
-                    <input type="text" className="form-control"  aria-describedby="userHelp" onChange={handleCalories}/>
+                    <input type="text" className="form-control"  aria-describedby="userHelp" onChange={handleCalories} required/>
                   </div>
 
                   <div class="form-group">
                     <label for="exampleFormControlSelect1">Cuisine Type</label>
-                    <select className="form-control" id="exampleFormControlSelect1" onChange={handleCuisine}>
+                    <select className="form-control" id="exampleFormControlSelect1" onChange={handleCuisine} required>
                       <option>Italian</option>
                       <option>Mexican</option>
                       <option>South Indian</option>
@@ -122,29 +124,29 @@ function RecipeForm() {
 
                   <label style={{paddingRight:"10px"}} for="inlineRadio1">Recipe Type</label>
                   <div className="form-check form-check-inline" onChange={handleRadio} >
-                  <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="Veg"/>
+                  <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="Veg" required/>
                   <label className="form-check-label" for="inlineRadio1">Veg</label>
                 </div>
                 <div className="form-check form-check-inline" onChange={handleRadio}>
-                  <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="Non-Veg"/>
+                  <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="Non-Veg" required/>
                   <label className="form-check-label" for="inlineRadio2">Non-Veg</label>
                 </div>
                   <div id="date-picker-example" className="md-form md-outline input-with-post-icon datepicker">
                     <label for="example">Select Recipe  Date:</label>
-                    <input placeholder="Select date" type="date" id="example" className="form-control"  onChange={handleDOB}/>
+                    <input placeholder="Select date" type="date" id="example" className="form-control"  onChange={handleDOB} required/>
                   <i className="fas fa-calendar input-prefix" ></i><br/></div>
                   <div className="form-group">
                     <label for="exampleFormControlFile1">Upload Recipe image:</label>
-                    <input type="file" className="form-control-file"  name="photo" onChange={handleImage}/>
+                    <input type="file" className="form-control-file"  name="photo" onChange={handleImage} required/>
                   </div>
                   <div className="form-group">
                     <label for="exampleInputusername">Ingredient and Quantity:</label>
-                    <input type="text" className="form-control" onChange={handleIngriedient} />
+                    <input type="text" className="form-control" onChange={handleIngriedient} required/>
                   </div>
 
                   <div className="md-form md-outline">
                   <label for="default-picker">Preparation Time</label>
-                  <input type="time" className="form-control" placeholder="Select time" onChange={handleprep}/>  
+                  <input type="time" className="form-control" placeholder="Select time" onChange={handleprep} required/>  
                 </div>
                   <br/>
                   <button  type="submit" className="btn btn-primary" onClick={handleClick} >Submit</button>
